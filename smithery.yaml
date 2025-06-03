@@ -1,0 +1,29 @@
+# Smithery configuration file: https://smithery.ai/docs/build/project-config
+
+startCommand:
+  type: stdio
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => ({command: 'node', args: ['dist/bot.js', '--host', config.host, '--port', config.port.toString(), '--username', config.username]})
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required: []
+    properties:
+      host:
+        type: string
+        default: localhost
+        description: Minecraft server host
+      port:
+        type: number
+        default: 25565
+        description: Minecraft server port
+      username:
+        type: string
+        default: ClaudeBot
+        description: Bot username
+  exampleConfig:
+    host: localhost
+    port: 25565
+    username: ClaudeBot
