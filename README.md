@@ -1,4 +1,5 @@
 # Minecraft MCP Server
+[![smithery badge](https://smithery.ai/badge/@yuniko-software/minecraft-mcp-server)](https://smithery.ai/server/@yuniko-software/minecraft-mcp-server)
 
 > ⚠️ **IMPORTANT COMPATIBILITY WARNING**: As of March 25, 2025, Minecraft 1.21.5 was just released. This bot is currently **NOT compatible** with Minecraft 1.21.5. Please use Minecraft 1.21.4 until we release an update with 1.21.5 support.
 
@@ -24,6 +25,14 @@ This bot is designed to be used with Claude Desktop through the Model Context Pr
 ### Run Minecraft
 
 Create a singleplayer world and open it to LAN (`ESC -> Open to LAN`). Bot will try to connect using port `25565` and hostname `localhost`. These parameters could be configured in `claude_desktop_config.json` on a next step. 
+
+### Installing via Smithery
+
+To install minecraft-mcp-server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@yuniko-software/minecraft-mcp-server):
+
+```bash
+npx -y @smithery/cli install @yuniko-software/minecraft-mcp-server --client claude
+```
 
 ### MCP Configuration
 
