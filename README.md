@@ -16,7 +16,7 @@ A Minecraft bot powered by large language models and [Mineflayer API](https://gi
 - Git
 - Node.js
 - A running Minecraft game (the setup below was tested with Minecraft 1.21.4 Java Edition included in Microsoft Game Pass)
-- Claude Desktop 
+- An MCP-compatible client. Claude Desktop will be used as an example, but other MCP clients are also supported
 
 ## Getting started
 
@@ -64,16 +64,15 @@ Double-check that right `--port` and `--host` parameters were used. Make sure to
 
 Make sure Minecraft game is running and the world is opened to LAN. Then start Claude Desktop application and the bot should join the game. 
 
-It could take some time for Claude Desktop to boot the MCP server. The marker that the server has booted successfully is a hammer icon that appears next to the chat.
+It could take some time for Claude Desktop to boot the MCP server. The marker that the server has booted successfully:
 
-![image](https://github.com/user-attachments/assets/1040c6a5-0d61-41d9-99e3-539026886392)
-
+![image](https://github.com/user-attachments/assets/39211d34-c3b3-46d6-bc80-353fd4fba690)
 
 You can give bot any commands through any active Claude Desktop chat. You can also upload images of buildings and ask bot to build them 😁
 
 Don't forget to mention that bot should do something in Minecraft in your prompt. Because saying this is a trigger to run MCP server. It will ask for your permissions.
 
-Using Claude 3.7 Sonnet could give you some interesting results. The bot-agent would be really smart 🫡
+Using Claude 4.0 Sonnet could give you some interesting results. The bot-agent would be really smart 🫡
 
 Example usage: [shared Claude chat](https://claude.ai/share/535d5f69-f102-4cdb-9801-f74ea5709c0b)
 
@@ -108,6 +107,9 @@ Once connected to a Minecraft server, Claude can use these commands:
 ### Communication
 - `send-chat` - Send a chat message in-game
 
+### Game State
+- `detect-gamemode` - Detect the gamemode on game
+
 ## Contributing
 
 This application was made in just two days, and the code is really simple and straightforward. All refactoring commits, functional and test contributions, issues and discussion are greatly appreciated!
@@ -118,3 +120,5 @@ Feel free to submit pull requests or open issues for improvements. Some areas th
 - More robust error handling
 - Tests for different components
 - New functionality and commands
+
+To get started with contributing, please see [CONTRIBUTING.md](CONTRIBUTING.md).
