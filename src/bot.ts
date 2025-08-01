@@ -374,27 +374,35 @@ function registerBlockTools(server: McpServer, bot: any) {
 
         // Try each potential face for placing
         for (const face of possibleFaces) {
-          const referencePos = placePos.plus(face.vector);
+          const referencePos   = placePos.plus(face.vector);
           const referenceBlock = bot.blockAt(referencePos);
 
-          if (referenceBlock && referenceBlock.name !== 'air') {
-            if (!bot.canSeeBlock(referenceBlock)) {
-              // Try to move closer to see the block
-              const goal = new goals.GoalNear(referencePos.x, referencePos.y, referencePos.z, 2);
-              await bot.pathfinder.goto(goal);
-            }
+          // Skip if neighbour is air
+          if (!referenceBlock || referenceBlock.name === 'air') continue;
 
-            await bot.lookAt(placePos, true);
+          /* 1️⃣  Make sure we can see the reference block by simply turning the head.
+                No path-finding move is needed for a 2-block reach in Creative. */
+          const refCenter = referenceBlock.position.offset(0.5, 0.5, 0.5);
+          await bot.lookAt(refCenter, false);
 
-            try {
-              await bot.placeBlock(referenceBlock, face.vector.scaled(-1));
-              return createResponse(`Placed block at (${x}, ${y}, ${z}) using ${face.direction} face`);
-            } catch (placeError) {
-              console.error(`Failed to place using ${face.direction} face: ${(placeError as Error).message}`);
-              continue;
-            }
+          /* 2️⃣  Click the face of the reference block that borders the target cube.
+                This is placePos − referencePos, not face.vector.scaled(-1)
+                (safer if you reorder the face list later). */
+          const clickVec = placePos.minus(referencePos);
+
+          try {
+            await bot.placeBlock(referenceBlock, clickVec);
+            return createResponse(
+              `Placed block at (${x}, ${y}, ${z}) using ${face.direction} face`
+            );
+          } catch (placeError) {
+            console.error(
+              `Failed to place using ${face.direction} face: ${(placeError as Error).message}`
+            );
+            /* fall through to try the next candidate face */
           }
         }
+
 
         return createResponse(`Failed to place block at (${x}, ${y}, ${z}): No suitable reference block found`);
       } catch (error) {
